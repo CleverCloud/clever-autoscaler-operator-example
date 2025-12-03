@@ -1,0 +1,7 @@
+apiVersion: api.clever-cloud.com/v1
+kind: NodeGroup
+metadata:
+  name: initial-nodegroup
+spec:
+  nodeCount: 2
+  flavor: S

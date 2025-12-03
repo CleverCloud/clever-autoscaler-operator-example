@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: clever-autoscaler-operator
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: clever-autoscaler-operator
+rules:
+- apiGroups: ["api.clever-cloud.com"]
+  resources: ["nodegroups"]
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get", "list"]
+- apiGroups: ["metrics.k8s.io"]
+  resources: ["nodes"]
+  verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: clever-autoscaler-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clever-autoscaler-operator
+subjects:
+- kind: ServiceAccount
+  name: clever-autoscaler-operator
+  namespace: default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clever-autoscaler-operator
+  namespace: default
+  labels:
+    app: clever-autoscaler-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clever-autoscaler-operator
+  template:
+    metadata:
+      labels:
+        app: clever-autoscaler-operator
+    spec:
+      serviceAccountName: clever-autoscaler-operator
+      containers:
+      - name: operator
+        image: ghcr.io/lostinbrittany/clever-autoscaler-operator-example:latest
+        imagePullPolicy: Always
+        env:
+        - name: CPU_THRESHOLD_HIGH
+          value: "80"
+        - name: CPU_THRESHOLD_LOW
+          value: "30"
+        - name: MEMORY_THRESHOLD_HIGH
+          value: "80"
+        - name: MEMORY_THRESHOLD_LOW
+          value: "30"
+        - name: MIN_NODES
+          value: "1"
+        - name: MAX_NODES
+          value: "10"
+        - name: RECONCILE_INTERVAL_SECONDS
+          value: "30"
+        - name: COOLDOWN_SECONDS
+          value: "180"
+        # Set to true only for development clusters with self-signed certs
+        - name: SKIP_TLS_VERIFY
+          value: "false"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

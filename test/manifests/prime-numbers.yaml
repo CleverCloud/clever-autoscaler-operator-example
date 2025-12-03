@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-stress-test
+  labels:
+    app: cpu-stress-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-stress-test
+  template:
+    metadata:
+      labels:
+        app: cpu-stress-test
+    spec:
+      containers:
+      - name: prime-numbers
+        image: ghcr.io/lostinbrittany/test-pod-prime-numbers:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "150m"
+            memory: "24Mi"
+          limits:
+            cpu: "800m"
+            memory: "128Mi"
+

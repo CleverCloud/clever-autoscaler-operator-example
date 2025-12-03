@@ -1,0 +1,29 @@
+{
+  "name": "clever-autoscaler-operator",
+  "version": "0.1.0",
+  "description": "Custom autoscaler operator for Clever Cloud Managed Kubernetes NodeGroups",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npx tsx src/index.ts",
+    "dev": "npx tsx watch src/index.ts"
+  },
+  "keywords": [
+    "kubernetes",
+    "operator",
+    "autoscaler",
+    "clever-cloud"
+  ],
+  "license": "MIT",
+  "trustedDependencies": [],
+  "dependencies": {
+    "@dot-i/k8s-operator": "^3.1.0",
+    "@kubernetes/client-node": "~1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.3.3"
+  }
+}

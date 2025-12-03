@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-stress-test
+  labels:
+    app: memory-stress-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-stress-test
+  template:
+    metadata:
+      labels:
+        app: memory-stress-test
+    spec:
+      containers:
+      - name: memory-grabber
+        image: ghcr.io/lostinbrittany/test-pod-memory-grabber:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "200m"
+            memory: "300Mi"
