@@ -3,8 +3,7 @@ set -e
 
 # Configuration
 USERNAME="lostinbrittany"
-# ACCOUNT="clevercloud"
-ACCOUNT="lostinbrittany"
+ACCOUNT="clevercloud"
 REGISTRY="ghcr.io"
 EXTRA_TAG=$1
 

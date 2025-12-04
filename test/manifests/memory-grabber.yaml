@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: memory-grabber
-        image: ghcr.io/lostinbrittany/test-pod-memory-grabber:latest
+        image: ghcr.io/clevercloud/test-pod-memory-grabber:latest
         ports:
         - containerPort: 8080
         resources:

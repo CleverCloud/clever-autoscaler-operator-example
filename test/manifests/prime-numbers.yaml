@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: prime-numbers
-        image: ghcr.io/lostinbrittany/test-pod-prime-numbers:latest
+        image: ghcr.io/clevercloud/test-pod-prime-numbers:latest
         ports:
         - containerPort: 8080
         resources:

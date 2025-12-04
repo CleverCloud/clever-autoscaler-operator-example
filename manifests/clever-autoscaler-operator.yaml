@@ -52,7 +52,7 @@ spec:
       serviceAccountName: clever-autoscaler-operator
       containers:
       - name: operator
-        image: ghcr.io/lostinbrittany/clever-autoscaler-operator-example:latest
+        image: ghcr.io/clevercloud/clever-autoscaler-operator-example:latest
         imagePullPolicy: Always
         env:
         - name: CPU_THRESHOLD_HIGH
