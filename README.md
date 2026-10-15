@@ -1,5 +1,3 @@
-![Clever Cloud logo](/assets/clever-cloud-logo.png)
-
 # Clever Autoscaler Operator
 
 [![Clever Cloud - PaaS](https://img.shields.io/badge/Clever%20Cloud-PaaS-orange?logo=clevercloud)](https://clever-cloud.com)
